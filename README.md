@@ -1,6 +1,6 @@
-# OSUSHI project native code
+# OSUSHI PROJECT: native code programs
 
-## Build
+## How to Build
 
 ### Step 1) Setup Tensorflow
 
@@ -26,5 +26,5 @@ You must use following options.
 $ bazel build //tensorflow/proj/osushi-native:libtensorflow.so --crosstool_top=//external:android/crosstool --cpu=armeabi-v7a --host_crosstool_top=@bazel_tools//tools/cpp:toolchain
 ```
 
-Building binary is in `bazel-bin/tensorflow/proj/osushi-native/libtensorflow.so`.
+Output binary file is located in `bazel-bin/tensorflow/proj/osushi-native/libtensorflow.so`.
 
