@@ -5,7 +5,7 @@ load("//tensorflow:tensorflow.bzl", "tf_copts")
 cc_binary(
     name = "libtensorflow.so",
     srcs = glob([
-        "jni/**/*.cc",
+        "jni/**/*.cpp",
         "jni/**/*.h",
     ]) + [],
     copts = tf_copts(),
