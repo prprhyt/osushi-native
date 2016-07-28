@@ -68,11 +68,7 @@ namespace osushi {
 JNIEXPORT jbyteArray JNICALL OSUSHI_NATIVE_METHOD(create)(JNIEnv* env, jobject instance){
     auto toro = new osushi::toro();
     toro->log.i("OSUSHI was successfully created.");
-    auto ptr = osushi::get_jptr(env, toro);
-    if(!ptr){
-        toro->log.d("Failed: NewByteArray");
-    }
-    return ptr;
+    return osushi::get_jptr(env, toro);
 }
 
 JNIEXPORT jboolean JNICALL OSUSHI_NATIVE_METHOD(method)(JNIEnv* env, jobject instance, jbyteArray ptr){
