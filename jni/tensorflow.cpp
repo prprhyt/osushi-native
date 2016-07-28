@@ -56,21 +56,27 @@ namespace osushi {
         env->SetByteArrayRegion(pointer, 0, sizeof(void*), (jbyte*)ptr);
         return pointer;
     }
-    void* revert_jptr(JNIEnv* env, jbyteArray ptr){
-        void* buffer;
-        env->GetByteArrayRegion(ptr, 0, sizeof(buffer), (jbyte*)&buffer);
+    template<typename T>
+    std::unique_ptr<T> revert_jptr(JNIEnv* env, jbyteArray ptr){
+        auto len = env->GetArrayLength(ptr);
+        auto buffer = std::unique_ptr<T>{reinterpret_cast<T*>(new char[(size_t)len])};
+        env->GetByteArrayRegion(ptr, 0, len, reinterpret_cast<jbyte*>(buffer.get()));
         return buffer;
     }
 }
 
 JNIEXPORT jbyteArray JNICALL OSUSHI_NATIVE_METHOD(create)(JNIEnv* env, jobject instance){
-    auto toro = new osushi::toro;
+    auto toro = new osushi::toro();
     toro->log.i("OSUSHI was successfully created.");
-    return osushi::get_jptr(env, toro);
+    auto ptr = osushi::get_jptr(env, toro);
+    if(!ptr){
+        toro->log.d("Failed: NewByteArray");
+    }
+    return ptr;
 }
 
 JNIEXPORT jboolean JNICALL OSUSHI_NATIVE_METHOD(method)(JNIEnv* env, jobject instance, jbyteArray ptr){
-    auto toro = (osushi::toro*)osushi::revert_jptr(env, ptr);
+    auto toro = osushi::revert_jptr<osushi::toro>(env, ptr);
     toro->log.i("Call method");
     return JNI_TRUE;
 }
