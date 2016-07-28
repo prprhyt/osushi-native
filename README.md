@@ -23,8 +23,8 @@ $ git clone https://github.com/ornew/osushi-native.git
 You must use following options.
 
 ```sh
-$ bazel build //tensorflow/proj/osushi-native:libtensorflow.so --crosstool_top=//external:android/crosstool --cpu=armeabi-v7a --host_crosstool_top=@bazel_tools//tools/cpp:toolchain
+$ bazel build //tensorflow/proj/osushi-native:libosushi.so --crosstool_top=//external:android/crosstool --cpu=armeabi-v7a --host_crosstool_top=@bazel_tools//tools/cpp:toolchain
 ```
 
-Output binary file is located in `bazel-bin/tensorflow/proj/osushi-native/libtensorflow.so`.
+Output binary file is located in `bazel-bin/tensorflow/proj/osushi-native/libosushi.so`.
 

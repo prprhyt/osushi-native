@@ -3,7 +3,7 @@ package(default_visibility = ["//visibility:public"])
 load("//tensorflow:tensorflow.bzl", "tf_copts")
 
 cc_binary(
-    name = "libtensorflow.so",
+    name = "libosushi.so",
     srcs = glob([
         "jni/**/*.cpp",
         "jni/**/*.h",
