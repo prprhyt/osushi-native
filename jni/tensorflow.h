@@ -7,12 +7,12 @@
 extern "C" {
 #endif// __cplusplus
 
-#define TENSORFLOW_METHOD(METHOD_NAME) \
-  Java_jagsc_dlfa_osushi_Tensorflow_##METHOD_NAME  // NOLINT
+#define OSUSHI_NATIVE_METHOD(METHOD_NAME) \
+  Java_jagsc_dlfa_osushi_NativeOsushi_##METHOD_NAME  // NOLINT
 
 
-JNIEXPORT jstring JNICALL TENSORFLOW_METHOD(create)(JNIEnv* env, jobject instance);
-JNIEXPORT jstring JNICALL TENSORFLOW_METHOD(method)(JNIEnv* env, jobject instance, jbyteArray ptr);
+JNIEXPORT jbyteArray JNICALL OSUSHI_NATIVE_METHOD(create)(JNIEnv* env, jobject instance);
+JNIEXPORT jboolean JNICALL OSUSHI_NATIVE_METHOD(method)(JNIEnv* env, jobject instance, jbyteArray ptr);
 
 #ifdef __cplusplus
 }
