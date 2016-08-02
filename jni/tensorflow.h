@@ -7,12 +7,13 @@
 extern "C" {
 #endif// __cplusplus
 
-#define OSUSHI_NATIVE_METHOD(METHOD_NAME) \
-  Java_jagsc_dlfa_osushi_NativeOsushi_##METHOD_NAME  // NOLINT
+// NO LINT
+#define OSUSHI_NATIVE_METHOD(METHOD_NAME) Java_jagsc_dlfa_osushi_OsushiNative_##METHOD_NAME
 
 
-JNIEXPORT jbyteArray JNICALL OSUSHI_NATIVE_METHOD(create)(JNIEnv* env, jobject instance);
-JNIEXPORT jboolean JNICALL OSUSHI_NATIVE_METHOD(method)(JNIEnv* env, jobject instance, jbyteArray ptr);
+JNIEXPORT jbyteArray JNICALL OSUSHI_NATIVE_METHOD(create) (JNIEnv* env, jobject instance, jstring j_model_name);
+JNIEXPORT jboolean   JNICALL OSUSHI_NATIVE_METHOD(destroy)(JNIEnv* env, jobject instance, jbyteArray ptr);
+JNIEXPORT jboolean   JNICALL OSUSHI_NATIVE_METHOD(method) (JNIEnv* env, jobject instance, jbyteArray ptr);
 
 #ifdef __cplusplus
 }

@@ -11,7 +11,7 @@ cc_binary(
         "jnipp/src/**/*.cpp",
         "jnipp/src/**/*.hpp",
     ]) + [],
-    copts = tf_copts() + ["-std=gnu++1y"],
+    copts = tf_copts() + ["-std=gnu++11"],
     includes = ["jnipp/src"],
     linkopts = [
         "-landroid",
