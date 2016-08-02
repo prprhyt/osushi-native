@@ -2,6 +2,7 @@
 
 #include <memory>
 #include <mutex>
+#include <thread>
 
 #include <android/log.h>
 #include <android/asset_manager.h>
@@ -12,6 +13,8 @@
 
 #include "tensorflow/core/platform/env.h"
 #include "tensorflow/core/platform/logging.h"
+
+#include "jnipp.hpp"
 
 namespace android {
     template<typename... T>
@@ -65,15 +68,23 @@ namespace osushi {
     }
 }
 
+std::string get_this_thread_id_string(){
+    std::stringstream ss;
+    ss << std::this_thread::get_id();
+    return ss.str();
+}
+
 JNIEXPORT jbyteArray JNICALL OSUSHI_NATIVE_METHOD(create)(JNIEnv* env, jobject instance){
     auto toro = new osushi::toro();
     toro->log.i("OSUSHI was successfully created.");
+    toro->log.d(("tid: " + get_this_thread_id_string()).c_str());
     return osushi::get_jptr(env, toro);
 }
 
 JNIEXPORT jboolean JNICALL OSUSHI_NATIVE_METHOD(method)(JNIEnv* env, jobject instance, jbyteArray ptr){
     auto toro = osushi::revert_jptr<osushi::toro>(env, ptr);
     toro->log.i("Call method");
+    toro->log.d(("tid: " + get_this_thread_id_string()).c_str());
     return JNI_TRUE;
 }
 

@@ -7,8 +7,12 @@ cc_binary(
     srcs = glob([
         "jni/**/*.cpp",
         "jni/**/*.h",
+        "jni/**/*.hpp",
+        "jnipp/src/**/*.cpp",
+        "jnipp/src/**/*.hpp",
     ]) + [],
-    copts = tf_copts(),
+    copts = tf_copts() + ["-std=gnu++1y"],
+    includes = ["jnipp/src"],
     linkopts = [
         "-landroid",
         "-ljnigraphics",
